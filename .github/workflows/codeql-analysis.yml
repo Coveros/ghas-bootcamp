@@ -39,6 +39,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 15
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -63,10 +68,11 @@ jobs:
 
     #   If the Autobuild fails above, remove it and uncomment the following three lines. 
     #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
-
+    
     # - run: |
     #   echo "Run, Build Application using script"
     #   ./location_of_script_within_repo/buildscript.sh
+
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
