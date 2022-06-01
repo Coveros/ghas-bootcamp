@@ -13,12 +13,18 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, derrick-test ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ main ]
   schedule:
     - cron: '20 8 * * 0'
+  workflow_dispatch: 
+    inputs:
+      tags:
+        description: 'Test scenario tags'
+        required: false 
+        type: boolean
 
 jobs:
   analyze:
