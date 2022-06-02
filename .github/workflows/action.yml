@@ -1,7 +1,7 @@
 name: Must run on custom runner!
 
 on: 
-  push:
+  workflow_dispatch:
 
 jobs:
   init:
