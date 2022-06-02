@@ -1,8 +1,8 @@
 # Borrowed from https://github.com/github/codeql-action/blob/main/.github/codeql/codeql-config.yml
 name: "CodeQL config"
 queries: 
-  - name: Run custom queries
-    uses: ./queries
+  # - name: Run custom queries
+  #  uses: ./queries
   # Run all extra query suites, both because we want to
   # and because it'll act as extra testing. This is why
   # we include both even though one is a superset of the
