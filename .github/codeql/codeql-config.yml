@@ -4,7 +4,7 @@ name: "CodeQL config"
 disable-default-queries: true
 
 queries:
-    - uses: ./custom-queries/code-scanning.qls
+    - uses: ./.github/codeql/custom-queries/code-scanning.qls
 
 # queries: 
   # - name: Run custom queries
