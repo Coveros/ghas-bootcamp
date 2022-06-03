@@ -8,5 +8,5 @@
 - import: codeql-suites/go-security-and-quality.qls
   from: codeql-go
 - exclude:
-  id:
+    id:
     - java/spring-disabled-csrf-protection
