@@ -13,7 +13,7 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ main, derrick-test ]
+    branches: [ main ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ main ]
@@ -44,7 +44,6 @@ jobs:
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
-        distribution: 'adopt'
         java-version: 15
 
     # Initializes the CodeQL tools for scanning.
@@ -84,6 +83,6 @@ jobs:
     - name: Upload SARIF as a Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: derrick-test-sarif
+        name: sarif
         path: code-scanning-results
         retention-days: 7
