@@ -1,0 +1,11 @@
+name: Must run on custom runner!
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  init:
+    runs-on: self-hosted
+    steps:
+      - run: echo 'This is a Coveros runner'
+      - run: hostname
