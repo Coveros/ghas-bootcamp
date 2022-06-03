@@ -5,6 +5,11 @@ disable-default-queries: true
 
 queries:
     - uses: ./.github/codeql/custom-queries/code-scanning.qls
+    - uses: ./.github/codeql/custom-queries/go/jwt.ql
+    
+    # Add custom queries from external repository
+    # - name: external-custom-queries
+    #   uses: {owner}/{repository}/<path-to-query>@<some-branch>
 
 # queries: 
   # - name: Run custom queries
