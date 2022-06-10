@@ -38,7 +38,7 @@ jobs:
           # The title for the GitHub issue to be created
           # issue_title: # optional, default is ZAP Scan Baseline Report
           # The action status will be set to fail if ZAP identifies any alerts during the baseline scan
-          fail_action: true # optional
+          fail_action: false # optional
           # The action will file the report to the GitHub issue using the issue_title input
           allow_issue_writing: true # optional, default is true
 
