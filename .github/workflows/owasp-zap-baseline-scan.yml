@@ -23,16 +23,16 @@ jobs:
     name: OWASP ZAP Baseline Scan
     runs-on: ubuntu-latest
     steps:
-      - uses: zaproxy/action-baseline@v0.6.1
+      - uses: zaproxy/action-baseline@v0.7.0
         with:
           # GitHub Token to create issues in the repository
           # token: ${{ secrets.GITHUB_TOKEN }} # optional, default is ${{ github.token }}
           # Target URL
-          target: 'https://coveros.github.io/ghas-bootcamp/'
+          target: 'https://www.zaproxy.org'
           # Relative path of the ZAP configuration file
           # rules_file_name: # optional
           # The Docker file to be executed
-          docker_name: 'owasp/zap2docker-stable' # default is owasp/zap2docker-stable
+          # docker_name: 'owasp/zap2docker-stable' # default is owasp/zap2docker-stable
           # Additional command line options
           # cmd_options: # optional
           # The title for the GitHub issue to be created
