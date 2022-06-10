@@ -1,0 +1,44 @@
+# OWASP ZAP Baseline Scan
+
+name: OWASP ZAP Baseline Scan
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Run at midnight UTC every Sunday
+  schedule: 
+    - cron: '0 0 * * SUN'
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  owasp-zap-baseline-scan:
+    name: OWASP ZAP Baseline Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: zaproxy/action-baseline@v0.6.1
+        with:
+          # GitHub Token to create issues in the repository
+          # token: ${{ secrets.GITHUB_TOKEN }} # optional, default is ${{ github.token }}
+          # Target URL
+          target: 'https://coveros.github.io/ghas-bootcamp/'
+          # Relative path of the ZAP configuration file
+          # rules_file_name: # optional
+          # The Docker file to be executed
+          docker_name: 'owasp/zap2docker-stable' # default is owasp/zap2docker-stable
+          # Additional command line options
+          # cmd_options: # optional
+          # The title for the GitHub issue to be created
+          # issue_title: # optional, default is ZAP Scan Baseline Report
+          # The action status will be set to fail if ZAP identifies any alerts during the baseline scan
+          fail_action: true # optional
+          # The action will file the report to the GitHub issue using the issue_title input
+          allow_issue_writing: true # optional, default is true
+
