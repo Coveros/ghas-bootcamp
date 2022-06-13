@@ -23,8 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Membership Audit Log
     steps:
-    - name: Membership Audit Log Action
-      uses: svanboxel/org-audit-action@v0.1.0
+    - name: Membership Audit Action for Enterprises and Organizations
+      uses: SvanBoxel/org-audit-action@0.1.0
       with:
         organization: 'Coveros'
         token: ${{ secrets.TOKEN }}
