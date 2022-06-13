@@ -18,7 +18,8 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ main ]
   schedule:
-    - cron: '20 8 * * 0'
+    - cron: '20 2 * * 0'
+  workflow_dispatch:
 
 jobs:
   analyze:
@@ -39,6 +40,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 15
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -70,3 +76,20 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+
+
+  # Compliance check
+  # Borrowed from --> https://github.com/GeekMasher/advanced-security-compliance/blob/main/examples/workflows/security.yml
+  compliance:
+    runs-on: ubuntu-latest
+
+    needs: [ analyze ]
+
+    steps:
+    - name: Advance Security Compliance Action
+      uses: GeekMasher/advanced-security-compliance@policy
+      with:
+        policy: GeekMasher/security-queries
+        policy-path: policies/default.yml
+        
+        
