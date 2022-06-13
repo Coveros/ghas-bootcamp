@@ -1,0 +1,32 @@
+# Membership Audit
+
+name: Membership Audit
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Run at 00:30 UTC every Sunday
+  schedule: 
+    - cron: '0 1 * * SUN'
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  audit_log:
+    runs-on: ubuntu-latest
+    name: Membership Audit Log
+    steps:
+    - name: Membership Audit Action for Enterprises and Organizations
+      uses: SvanBoxel/org-audit-action@0.1.0
+      with:
+        organization: 'Coveros'
+        token: ${{ secrets.TOKEN }}
+        issue: true
+        samlIdentities: true
