@@ -1,0 +1,23 @@
+# Borrowed from
+# https://github.com/GeekMasher/advanced-security-compliance/blob/main/examples/workflows/licensing.yml
+
+name: Licensing Compliance
+
+on:
+  schedule:
+    - cron: '30 3 * * 0'
+  workflow_dispatch:
+
+jobs:
+  licensing:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Advance Security Compliance Action
+      uses: GeekMasher/advanced-security-compliance@v1.6
+      with:
+        # We'll need an access token that can call the GraphQL GitHub API to get
+        #  all the of the licensing data.
+        token: ${{ secrets.ACCESS_TOKEN }}
+        # Disable everything else to check for and focus on licensing
+        argvs: '--disable-dependabot --disable-secret-scanning --disable-code-scanning'
