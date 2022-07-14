@@ -12,13 +12,14 @@
 name: "CodeQL"
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
+#  push:
+#    branches: [ main ]
+#  pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ main ]
-  schedule:
-    - cron: '20 8 * * 0'
+#    branches: [ main ]
+#  schedule:
+#    - cron: '20 1 * * 6'
+  workflow_dispatch:
 
 jobs:
   analyze:
@@ -39,12 +40,18 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 15
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
+        queries: security-and-quality
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
         # Prefix the list here with "+" to use these queries and those in the config file.
@@ -70,3 +77,47 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+      with:
+        output: code-scanning-results
+
+    - name: Upload SARIF as a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: sarif
+        path: code-scanning-results
+        retention-days: 7
+
+
+
+  custom-queries:
+    name: Custom Queries
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        config-file: ./.github/codeql/codeql-config.yml
+        languages: javascript
+        
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        output: custom-queries-results
+
+    - name: Upload SARIF as a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: sarif
+        path: custom-queries-results
+        retention-days: 7
