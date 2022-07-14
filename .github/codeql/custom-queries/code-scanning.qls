@@ -1,0 +1,10 @@
+# Reusing existing QL Pack
+- import: codeql-suites/javascript-security-and-quality.qls
+  from: codeql-javascript
+- import: codeql-suites/java-security-and-quality.qls
+  from: codeql-java
+- import: codeql-suites/python-security-and-quality.qls
+  from: codeql-python
+- import: codeql-suites/go-security-and-quality.qls
+  from: codeql-go
+  
