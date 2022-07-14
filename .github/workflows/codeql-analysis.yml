@@ -12,13 +12,13 @@
 name: "CodeQL"
 
 on:
-#  push:
-#    branches: [ main ]
-#  pull_request:
+  push:
+    branches: [ main ]
+  pull_request:
     # The branches below must be a subset of the branches above
-#    branches: [ main ]
-#  schedule:
-#    - cron: '20 8 * * 0'
+    branches: [ main ]
+  schedule:
+    - cron: '20 1 * * 6'
   workflow_dispatch:
 
 jobs:
@@ -50,6 +50,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
+        config-file: ./.github/codeql/codeql-config.yml
         languages: ${{ matrix.language }}
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
@@ -69,11 +70,19 @@ jobs:
 
     #   If the Autobuild fails above, remove it and uncomment the following three lines. 
     #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
-    
+
     # - run: |
     #   echo "Run, Build Application using script"
     #   ./location_of_script_within_repo/buildscript.sh
 
-
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+      with:
+        output: code-scanning-results
+
+    - name: Upload SARIF as a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: sarif
+        path: code-scanning-results
+        retention-days: 7
